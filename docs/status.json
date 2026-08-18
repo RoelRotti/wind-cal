@@ -1,9 +1,9 @@
 {
   "error_message": null,
-  "ics_changed": false,
-  "last_run_at_utc": "2026-08-18T19:22:46.124903+00:00",
+  "ics_changed": true,
+  "last_run_at_utc": "2026-08-18T19:36:03.518302+00:00",
   "last_run_status": "ok",
-  "last_success_at_utc": "2026-08-18T19:22:46.124903+00:00",
+  "last_success_at_utc": "2026-08-18T19:36:03.518302+00:00",
   "model_used": "gfs",
   "qualifying_timeslots_count": 3,
   "spot_id": 1120682

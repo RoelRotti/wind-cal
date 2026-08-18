@@ -36,8 +36,10 @@ def _apply_content(event: Event, slot: Timeslot, spot_id: int, spot_name: str, n
     event.add("status", "CONFIRMED")
     event.add(
         "summary",
-        f"{_wind_emoji(slot.avg_wind_kt)} {_emoji_number(round(slot.avg_wind_kt))}"
-        f" / {_emoji_number(round(slot.max_gust_kt))} ({direction})",
+        f"{_wind_emoji(slot.avg_wind_kt)}\n"
+        f"{_emoji_number(round(slot.avg_wind_kt))}\n"
+        f"{_emoji_number(round(slot.max_gust_kt))}\n"
+        f"{direction}",
     )
     event.add("location", spot_name)
     event.add(
