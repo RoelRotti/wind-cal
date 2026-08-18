@@ -56,11 +56,16 @@ def _summarize(run: list[ForecastPoint], start: datetime, end: datetime) -> Time
     weighted_wind = sum(p.wind_avg_kt * (p.end - p.start).total_seconds() for p in run)
     peak_point = max(run, key=lambda p: p.wind_avg_kt)
 
+    models = []
+    for p in run:
+        if p.model not in models:
+            models.append(p.model)
+
     return Timeslot(
         start=start,
         end=end,
         avg_wind_kt=weighted_wind / total_seconds,
         max_gust_kt=max(p.gust_kt for p in run),
         direction=peak_point.direction,
-        model=run[0].model,
+        model=", ".join(models),
     )

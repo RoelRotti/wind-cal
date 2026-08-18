@@ -4,11 +4,12 @@ name = "Wijk aan Zee, NL"
 timezone = "Europe/Amsterdam"
 
 [forecast]
-# Model code for the micro.windguru.cz "m" parameter.
-# "gfs"    = GFS 13 km (World), ~16 day horizon (default: longest lookahead)
-# "harmnl" = HARM-NL 2 km (Netherlands), higher resolution, shorter horizon
-# Full list: http://micro.windguru.cz/help.php
-model = "gfs"
+# primary_model is used for whatever forecast horizon it covers (HARM-NL is
+# high-resolution and Netherlands-specific, but only covers ~2-3 days out);
+# fallback_model fills in the remaining horizon beyond that.
+# Full model list: http://micro.windguru.cz/help.php
+primary_model = "harmnl"
+fallback_model = "gfs"
 
 [thresholds]
 min_avg_wind_kt = 16.0

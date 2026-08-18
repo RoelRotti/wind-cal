@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from analyzer import find_windy_timeslots
 from config import ConfigError, load_config
 from ics_writer import build_calendar, read_existing, write_if_changed
-from scraper import ScraperError, fetch_forecast
+from scraper import ScraperError, fetch_forecast, merge_forecasts
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger("wind-cal")
@@ -39,12 +39,24 @@ def run() -> int:
     status = {
         "last_run_at_utc": now.isoformat(),
         "spot_id": config.spot_id,
-        "model_used": config.model,
+        "primary_model": config.primary_model,
+        "fallback_model": config.fallback_model,
         "last_success_at_utc": previous_status.get("last_success_at_utc"),
     }
 
     try:
-        points = fetch_forecast(config.spot_id, config.model, config.timezone)
+        try:
+            primary_points = fetch_forecast(config.spot_id, config.primary_model, config.timezone)
+        except ScraperError as e:
+            logger.warning(
+                "primary model (%s) fetch failed, using %s for the full horizon: %s",
+                config.primary_model, config.fallback_model, e,
+            )
+            primary_points = []
+
+        fallback_points = fetch_forecast(config.spot_id, config.fallback_model, config.timezone)
+        points = merge_forecasts(primary_points, fallback_points)
+
         timeslots = find_windy_timeslots(points, config.min_avg_wind_kt, config.min_duration_hours)
         existing_ics = read_existing(config.ics_path)
         new_ics = build_calendar(

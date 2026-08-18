@@ -49,6 +49,16 @@ def fetch_forecast(spot_id: int, model: str, timezone: ZoneInfo) -> list[Forecas
     return parse_forecast(text, timezone)
 
 
+def merge_forecasts(primary: list[ForecastPoint], fallback: list[ForecastPoint]) -> list[ForecastPoint]:
+    """Use `primary` for whatever horizon it covers, then `fallback` for the
+    remaining horizon beyond that (e.g. a short-range high-res model followed
+    by a longer-range one)."""
+    if not primary:
+        return fallback
+    cutover = primary[-1].end
+    return primary + [p for p in fallback if p.start >= cutover]
+
+
 def _fetch_raw(spot_id: int, model: str) -> str:
     url = f"{BASE_URL}?s={spot_id}&m={model}&v=WSPD,GUST,WDIRN"
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})

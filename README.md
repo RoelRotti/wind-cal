@@ -63,9 +63,15 @@ sensitive to `config.toml`'s `calendar_name` or event content.
 ## Configuration (`config.toml`)
 
 - `spot.id` — windguru spot ID (from `https://www.windguru.cz/<id>`)
-- `forecast.model` — micro.windguru.cz model code (default `gfs`; see
-  `http://micro.windguru.cz/help.php` for the full list, e.g. `harmnl` for the
-  higher-resolution, shorter-range Netherlands-specific model)
+- `forecast.primary_model` / `forecast.fallback_model` — micro.windguru.cz model
+  codes (see `http://micro.windguru.cz/help.php` for the full list). The
+  primary model is used for whatever forecast horizon it covers; the fallback
+  model fills in the rest. Default: `harmnl` (HARM-NL 2km, high-resolution,
+  Netherlands-specific, ~2-3 days out) falling back to `gfs` (GFS 13km, ~16
+  day horizon). If the primary model's fetch fails outright, the pipeline logs
+  a warning and uses the fallback model for the entire horizon instead of
+  failing. Each event's description states which model(s) it's based on —
+  a timeslot that happens to span the handoff point lists both.
 - `thresholds.min_avg_wind_kt` / `thresholds.min_duration_hours` — the windy-slot
   criteria
 - `output.*` — where the `.ics` and status files are written

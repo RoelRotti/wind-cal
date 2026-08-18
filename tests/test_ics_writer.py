@@ -8,10 +8,10 @@ from ics_writer import build_calendar
 T0 = datetime(2026, 1, 1, 12, 0, tzinfo=timezone.utc)
 
 
-def slot(hour_offset, duration_hours, avg=17.0, gust=20.0, direction="W"):
+def slot(hour_offset, duration_hours, avg=17.0, gust=20.0, direction="W", model="TEST"):
     start = T0 + timedelta(hours=hour_offset)
     end = start + timedelta(hours=duration_hours)
-    return Timeslot(start=start, end=end, avg_wind_kt=avg, max_gust_kt=gust, direction=direction, model="TEST")
+    return Timeslot(start=start, end=end, avg_wind_kt=avg, max_gust_kt=gust, direction=direction, model=model)
 
 
 def test_round_trip():
@@ -44,6 +44,20 @@ def test_changed_slot_bumps_sequence_and_keeps_uid():
     assert str(events1[0]["UID"]) == str(events2[0]["UID"])
     assert int(events1[0]["SEQUENCE"]) == 0
     assert int(events2[0]["SEQUENCE"]) == 1
+
+
+def test_model_only_change_bumps_sequence():
+    original = [slot(0, 3, model="HARM-NL 2 km")]
+    ics1 = build_calendar(original, 1, "Test Spot", "Test Cal", None, T0)
+
+    same_numbers_different_model = [slot(0, 3, model="HARM-NL 2 km, GFS 13 km")]
+    ics2 = build_calendar(same_numbers_different_model, 1, "Test Spot", "Test Cal", ics1, T0 + timedelta(hours=1))
+
+    events1 = list(Calendar.from_ical(ics1).walk("VEVENT"))
+    events2 = list(Calendar.from_ical(ics2).walk("VEVENT"))
+    assert int(events1[0]["SEQUENCE"]) == 0
+    assert int(events2[0]["SEQUENCE"]) == 1
+    assert "GFS" in str(events2[0]["DESCRIPTION"])
 
 
 def test_removed_slot_drops_from_output():

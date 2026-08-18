@@ -50,6 +50,7 @@ def _apply_content(event: Event, slot: Timeslot, spot_id: int, spot_name: str, n
     event.add("x-windcal-avg-kt", f"{round(slot.avg_wind_kt, 1)}")
     event.add("x-windcal-gust-kt", f"{round(slot.max_gust_kt, 1)}")
     event.add("x-windcal-direction", direction)
+    event.add("x-windcal-model", slot.model)
 
 
 def _new_event(uid: str, slot: Timeslot, spot_id: int, spot_name: str, now: datetime) -> Event:
@@ -74,6 +75,7 @@ def _content_key(event: Event) -> tuple:
         str(event["X-WINDCAL-AVG-KT"]),
         str(event["X-WINDCAL-GUST-KT"]),
         str(event["X-WINDCAL-DIRECTION"]),
+        str(event.get("X-WINDCAL-MODEL", "")),
     )
 
 
@@ -83,6 +85,7 @@ def _content_key_from_slot(slot: Timeslot) -> tuple:
         f"{round(slot.avg_wind_kt, 1)}",
         f"{round(slot.max_gust_kt, 1)}",
         slot.direction or "?",
+        slot.model,
     )
 
 

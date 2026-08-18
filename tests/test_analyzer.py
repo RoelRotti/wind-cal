@@ -6,7 +6,7 @@ from scraper import ForecastPoint
 T0 = datetime(2026, 1, 1, 0, 0, tzinfo=timezone.utc)
 
 
-def pt(hour_offset, duration_hours, wind, gust=None, direction="W"):
+def pt(hour_offset, duration_hours, wind, gust=None, direction="W", model="TEST"):
     start = T0 + timedelta(hours=hour_offset)
     end = start + timedelta(hours=duration_hours)
     return ForecastPoint(
@@ -15,7 +15,7 @@ def pt(hour_offset, duration_hours, wind, gust=None, direction="W"):
         wind_avg_kt=wind,
         gust_kt=gust if gust is not None else wind + 2,
         direction=direction,
-        model="TEST",
+        model=model,
     )
 
 
@@ -67,6 +67,19 @@ def test_duration_weighted_average_across_resolution_change():
     expected_avg = (20 * 1 + 16 * 3 + 16 * 3) / 7
     assert abs(slots[0].avg_wind_kt - expected_avg) < 1e-9
     assert slots[0].end - slots[0].start == timedelta(hours=7)
+
+
+def test_run_spanning_two_models_labels_both_in_order():
+    points = [pt(0, 1, 18, model="HARM-NL 2 km"), pt(1, 1, 18, model="GFS 13 km")]
+    slots = find_windy_timeslots(points, min_avg_wind_kt=16.0, min_duration_hours=2.0)
+    assert len(slots) == 1
+    assert slots[0].model == "HARM-NL 2 km, GFS 13 km"
+
+
+def test_run_within_single_model_labels_just_that_model():
+    points = [pt(0, 1, 18), pt(1, 1, 18), pt(2, 1, 18)]
+    slots = find_windy_timeslots(points, min_avg_wind_kt=16.0, min_duration_hours=3.0)
+    assert slots[0].model == "TEST"
 
 
 def test_time_gap_splits_run_even_when_both_sides_qualify():

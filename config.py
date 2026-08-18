@@ -11,7 +11,8 @@ class Config:
     spot_id: int
     spot_name: str
     timezone: ZoneInfo
-    model: str
+    primary_model: str
+    fallback_model: str
     min_avg_wind_kt: float
     min_duration_hours: float
     ics_path: str
@@ -52,15 +53,19 @@ def load_config(path: str | None = None) -> Config:
         if min_duration_hours <= 0:
             raise ConfigError("thresholds.min_duration_hours must be positive")
 
-        model = str(forecast["model"]).strip()
-        if not model:
-            raise ConfigError("forecast.model must not be empty")
+        primary_model = str(forecast["primary_model"]).strip()
+        fallback_model = str(forecast["fallback_model"]).strip()
+        if not primary_model:
+            raise ConfigError("forecast.primary_model must not be empty")
+        if not fallback_model:
+            raise ConfigError("forecast.fallback_model must not be empty")
 
         return Config(
             spot_id=int(spot["id"]),
             spot_name=str(spot["name"]),
             timezone=timezone,
-            model=model,
+            primary_model=primary_model,
+            fallback_model=fallback_model,
             min_avg_wind_kt=min_avg_wind_kt,
             min_duration_hours=min_duration_hours,
             ics_path=str(output["ics_path"]),
