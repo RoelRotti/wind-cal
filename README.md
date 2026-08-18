@@ -18,7 +18,7 @@ at least 3 hours. Both configurable in `config.toml`.
    slots are added, changed ones are updated, stale ones are removed. Existing
    unaffected events are left byte-identical.
 4. A GitHub Actions workflow runs this hourly and commits the result, which
-   GitHub Pages serves at a stable URL.
+   is then reachable at a stable `raw.githubusercontent.com` URL.
 
 ## Local setup
 
@@ -34,15 +34,18 @@ touch nothing but `status.json`'s timestamp.
 
 To run the tests: `.venv/bin/pip install -r requirements-dev.txt && .venv/bin/pytest`
 
-## Publishing via GitHub Pages
+## Publishing
 
 1. Create a GitHub repository and push this project to `main`.
-2. In the repo: **Settings → Pages → Build and deployment → Source** → "Deploy
-   from a branch" → branch `main`, folder `/docs` → Save.
-3. After the first Pages build (~1-2 min), your feed URL will be:
-   `https://<your-username>.github.io/<repo-name>/wijk-aan-zee-wind.ics`
-4. Make sure Actions are enabled for the repo (Settings → Actions → General —
-   on by default) so the hourly workflow actually runs.
+2. Make sure Actions are enabled for the repo (Settings → Actions → General —
+   on by default) so the hourly workflow actually runs and commits updates.
+3. Your feed URL is then:
+   `https://raw.githubusercontent.com/<your-username>/<repo-name>/main/docs/wijk-aan-zee-wind.ics`
+
+No extra hosting setup needed — GitHub serves any committed file's raw
+content directly from the repo at that URL, updated the moment the workflow
+pushes a change (no separate build/deploy step, unlike GitHub Pages, which
+this project doesn't use).
 
 The feed URL is public and unauthenticated — anyone with the link can read it.
 That's fine here since it only contains wind timeslots, but don't add anything
@@ -51,7 +54,7 @@ sensitive to `config.toml`'s `calendar_name` or event content.
 ## Subscribing from Google Calendar
 
 1. Google Calendar → left sidebar → "Other calendars" **+** → **"From URL"**.
-2. Paste the GitHub Pages URL from above → "Add calendar".
+2. Paste the feed URL from above → "Add calendar".
 3. **Google only re-checks subscribed feeds roughly every 12–24 hours**, with
    no manual refresh option. The feed itself updates hourly, but your Google
    Calendar view will lag behind it by up to a day. This is a Google
@@ -69,7 +72,7 @@ sensitive to `config.toml`'s `calendar_name` or event content.
 
 ## If it stops updating
 
-Check `docs/status.json` (also served via Pages) for `last_run_status` and
+Check `docs/status.json` (also fetchable via the same raw-URL pattern) for `last_run_status` and
 `error_message`. GitHub also emails the repo owner when a scheduled workflow
 run fails. The most likely long-term failure mode is windguru changing their
 forecast text format — if `scraper.py` starts raising `ScraperParseError`, use
