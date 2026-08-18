@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>micro.windguru.cz</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="Robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: monospace; }
+</style>
+</head>
+<body>
+<pre>
+Windguru forecast
+
+Netherlands - Wijk aan Zee,  lat: 52.4938, lon: 4.5842, SST: 21 C
+
+GFS 13 km (init: 2026-08-18 12 UTC)
+
+        Date    WSPD    GUST   WDIRN
+     (UTC+2)   knots   knots    dir.
+
+ Tue 18. 14h      17      19       W
+ Tue 18. 15h      17      20       W
+ Tue 18. 16h      17      21       W
+ Tue 18. 17h      15      22       W
+ Tue 18. 18h      12      19     WNW
+ Tue 18. 19h      10      18     WNW
+ Tue 18. 20h       9      18     WNW
+ Tue 18. 21h       8      14     WNW
+ Tue 18. 22h       7      10       W
+ Tue 18. 23h       8      10       W
+
+ Wed 19. 00h       8      11     WSW
+ Wed 19. 01h       9      13     WSW
+ Wed 19. 02h       9      13     WSW
+ Wed 19. 03h      11      14     WSW
+ Wed 19. 04h      10      13       W
+ Wed 19. 05h       8      10     WNW
+ Wed 19. 06h      11      12       W
+ Wed 19. 07h      13      14      NW
+ Wed 19. 08h      14      17     WNW
+ Wed 19. 09h      14      20     WNW
+ Wed 19. 10h      12      16       W
+ Wed 19. 11h      11      14     WSW
+ Wed 19. 12h      11      15     WSW
+ Wed 19. 13h      12      15     WSW
+ Wed 19. 14h      13      15       W
+ Wed 19. 15h      12      14       W
+ Wed 19. 16h      10      11       W
+ Wed 19. 17h       8       9       W
+ Wed 19. 18h       6       8       W
+ Wed 19. 19h       4       5     WNW
+ Wed 19. 20h       2       3       W
+ Wed 19. 21h       3       4     WSW
+ Wed 19. 22h       3       3     SSW
+ Wed 19. 23h       5       5       S
+
+ Thu 20. 00h       6       7     SSE
+ Thu 20. 01h       9      12     SSW
+ Thu 20. 02h       7      10     SSW
+ Thu 20. 03h      10      13       S
+ Thu 20. 04h      11      16       S
+ Thu 20. 05h      12      16       S
+ Thu 20. 06h      12      17     SSW
+ Thu 20. 07h      12      17      SW
+ Thu 20. 08h      13      17     WSW
+ Thu 20. 09h      16      19     WSW
+ Thu 20. 10h      18      19     WSW
+ Thu 20. 11h      17      19     WSW
+ Thu 20. 12h      17      19     WSW
+ Thu 20. 13h      17      18     WSW
+ Thu 20. 14h      15      17     WSW
+ Thu 20. 15h      16      18      SW
+ Thu 20. 16h      14      17      SW
+ Thu 20. 17h      14      17     WSW
+ Thu 20. 18h      14      17     WSW
+ Thu 20. 19h      14      15     WSW
+ Thu 20. 20h      11      14     WSW
+ Thu 20. 21h      11      13     WSW
+ Thu 20. 22h      12      14       W
+ Thu 20. 23h      11      13     WNW
+
+ Fri 21. 00h      11      13     WNW
+ Fri 21. 01h      10      11      NW
+ Fri 21. 02h       9       9      NW
+ Fri 21. 03h       9       9     NNW
+ Fri 21. 04h      10      10     NNW
+ Fri 21. 05h      10      10     NNW
+ Fri 21. 06h       8       8     NNW
+ Fri 21. 07h       8       9     NNW
+ Fri 21. 08h       9      10       N
+ Fri 21. 09h       7       8       N
+ Fri 21. 10h       6       7       N
+ Fri 21. 11h       6       7       N
+ Fri 21. 12h       6       6       N
+ Fri 21. 13h       8       7     NNW
+ Fri 21. 14h      10       8     NNW
+ Fri 21. 15h      12       9     NNW
+ Fri 21. 16h      12      10     NNW
+ Fri 21. 17h      11      10     NNW
+ Fri 21. 18h      11       9     NNW
+ Fri 21. 19h      11      10     NNW
+ Fri 21. 20h      10      11     NNW
+ Fri 21. 23h       5       6       N
+
+ Sat 22. 02h       2       3       N
+ Sat 22. 05h       7       8     NNE
+ Sat 22. 08h       9      12     NNE
+ Sat 22. 11h      11      10       N
+ Sat 22. 14h      13      10      NW
+ Sat 22. 17h      13      12     NNW
+ Sat 22. 20h      12      13     NNW
+ Sat 22. 23h      10      11      NW
+
+ Sun 23. 02h      11      12      NW
+ Sun 23. 05h      10      10     NNW
+ Sun 23. 08h      11      13     NNW
+ Sun 23. 11h      13      12     NNW
+ Sun 23. 14h      13      13     NNW
+ Sun 23. 17h      12      11     NNW
+ Sun 23. 20h      10      11     NNW
+ Sun 23. 23h       6       7     NNE
+
+ Mon 24. 02h       5       6     NNE
+ Mon 24. 05h       6       7     NNE
+ Mon 24. 08h       4       5      NE
+ Mon 24. 11h       4       4     NNW
+ Mon 24. 14h       6       7     NNW
+ Mon 24. 17h      10       8     NNW
+ Mon 24. 20h      12      12     NNE
+ Mon 24. 23h      10      13      NE
+
+ Tue 25. 02h      10      15     ENE
+ Tue 25. 05h       9      12     ENE
+ Tue 25. 08h       9      14     ENE
+ Tue 25. 11h      10      12      NE
+ Tue 25. 14h      10      12     NNE
+ Tue 25. 17h      14      13       N
+ Tue 25. 20h      12      14     NNE
+ Tue 25. 23h      10      14      NE
+
+ Wed 26. 02h       7       9     ENE
+ Wed 26. 05h       5       6     ENE
+ Wed 26. 08h       5       5     ESE
+ Wed 26. 11h       4       6     SSE
+ Wed 26. 14h       3       5     WSW
+ Wed 26. 17h       9       8     WNW
+ Wed 26. 20h       6       7       N
+ Wed 26. 23h       8      11     ESE
+
+ Thu 27. 02h       9      13      SE
+ Thu 27. 05h      10      13      SE
+ Thu 27. 08h       9      14     SSE
+ Thu 27. 11h      10      19     SSW
+ Thu 27. 14h      16      16     WSW
+ Thu 27. 17h      10      11       W
+ Thu 27. 20h       7       8       W
+ Thu 27. 23h       7       7       W
+
+ Fri 28. 02h       4       5     SSW
+ Fri 28. 05h       9      10       S
+ Fri 28. 08h      10      12       S
+ Fri 28. 11h      12      12     SSW
+ Fri 28. 14h      13      14      SW
+ Fri 28. 17h       9      14      SW
+ Fri 28. 20h      15      24     SSE
+ Fri 28. 23h      23      35       S
+
+ Sat 29. 02h      22      34     SSW
+ Sat 29. 05h      24      35     SSW
+ Sat 29. 08h      14      21     WSW
+ Sat 29. 11h      20      24     WSW
+ Sat 29. 14h      19      22     WSW
+ Sat 29. 17h      14      16       W
+ Sat 29. 20h       8       9      NW
+ Sat 29. 23h       3       4      NW
+
+ Sun 30. 02h       5       5      SE
+ Sun 30. 05h       6       7     SSE
+ Sun 30. 08h       8       9     SSE
+ Sun 30. 11h       6       7      SW
+ Sun 30. 14h      13      12      NW
+ Sun 30. 17h      12      12     WNW
+ Sun 30. 20h       7       9     WNW
+ Sun 30. 23h       7       7     WSW
+
+ Mon 31. 02h      11      11      SW
+ Mon 31. 05h      11      13     SSW
+ Mon 31. 08h      11      14       S
+ Mon 31. 11h      13      14     SSW
+ Mon 31. 14h      14      15      SW
+ Mon 31. 17h      11      12      SW
+ Mon 31. 20h       6       8      SW
+ Mon 31. 23h       6       7     SSW
+
+  Tue 1. 02h       7       8     SSE
+  Tue 1. 05h       8      11       S
+  Tue 1. 08h      10      14       S
+  Tue 1. 11h       9      12     SSW
+  Tue 1. 14h       7       9      SW
+  Tue 1. 17h       4       7     WSW
+  Tue 1. 20h       2       3     ESE
+  Tue 1. 23h      10      15     ESE
+
+  Wed 2. 02h      11      20      SE
+  Wed 2. 05h      12      23     SSE
+  Wed 2. 08h      12      21     SSE
+  Wed 2. 11h      11      16     SSE
+  Wed 2. 14h       9      11       S
+  Wed 2. 17h       8      10       S
+  Wed 2. 20h      11      15      SE
+  Wed 2. 23h      12      21      SE
+
+  Thu 3. 02h      11      19     SSE
+  Thu 3. 05h       9      14       S
+  Thu 3. 08h       9      14      SW
+  Thu 3. 11h       7       8     WSW
+  Thu 3. 14h       9       9     WNW
+
+
+</pre>
+&copy; 2000 - 2026 Windguru    
+</body>
+</html>

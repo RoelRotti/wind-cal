@@ -1,0 +1,20 @@
+[spot]
+id = 1120682
+name = "Wijk aan Zee, NL"
+timezone = "Europe/Amsterdam"
+
+[forecast]
+# Model code for the micro.windguru.cz "m" parameter.
+# "gfs"    = GFS 13 km (World), ~16 day horizon (default: longest lookahead)
+# "harmnl" = HARM-NL 2 km (Netherlands), higher resolution, shorter horizon
+# Full list: http://micro.windguru.cz/help.php
+model = "gfs"
+
+[thresholds]
+min_avg_wind_kt = 16.0
+min_duration_hours = 4.0
+
+[output]
+ics_path = "docs/wijk-aan-zee-wind.ics"
+status_path = "docs/status.json"
+calendar_name = "Wijk aan Zee Wind"

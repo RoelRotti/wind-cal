@@ -1,0 +1,39 @@
+name: Update wind calendar
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "config.toml"
+      - "*.py"
+      - ".github/workflows/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-calendar
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - run: pip install -r requirements.txt
+      - run: python pipeline.py
+      - name: Commit and push if changed
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/wijk-aan-zee-wind.ics docs/status.json
+          git diff --cached --quiet || git commit -m "Update forecast $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
