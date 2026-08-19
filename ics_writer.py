@@ -29,6 +29,21 @@ def _emoji_number(n: int) -> str:
     return "".join(_DIGIT_EMOJI[digit] for digit in str(n))
 
 
+RAIN_THRESHOLD_MM = 0.5  # below this, treat as negligible/trace rather than "rain expected"
+
+
+def _weather_emoji(total_rain_mm: float, avg_cloud_cover_pct: float | None) -> str:
+    if total_rain_mm >= RAIN_THRESHOLD_MM:
+        return "🌧️"
+    if avg_cloud_cover_pct is None:
+        return ""  # no cloud data available for this slot — omit rather than guess
+    if avg_cloud_cover_pct < 30:
+        return "☀️"
+    if avg_cloud_cover_pct < 70:
+        return "⛅"
+    return "☁️"
+
+
 def _apply_content(event: Event, slot: Timeslot, spot_id: int, spot_name: str, now: datetime) -> None:
     direction = slot.direction or "?"
     windguru_url = f"https://www.windguru.cz/{spot_id}"
@@ -38,23 +53,26 @@ def _apply_content(event: Event, slot: Timeslot, spot_id: int, spot_name: str, n
     event.add("status", "CONFIRMED")
     avg_display = round(slot.avg_wind_kt)
     gust_display = round(slot.max_gust_kt)
-    event.add(
-        "summary",
-        f"{_wind_emoji(avg_display)}\n"
-        f"{_emoji_number(avg_display)}\n"
-        f"{_emoji_number(gust_display)}\n"
-        f"{direction}",
-    )
+    weather_emoji = _weather_emoji(slot.total_rain_mm, slot.avg_cloud_cover_pct)
+    summary_lines = [_wind_emoji(avg_display), _emoji_number(avg_display), _emoji_number(gust_display), direction]
+    if weather_emoji:
+        summary_lines.append(weather_emoji)
+    event.add("summary", "\n".join(summary_lines))
     event.add("location", spot_name)
+
+    cloud_text = f"{slot.avg_cloud_cover_pct:.0f}% cloud cover" if slot.avg_cloud_cover_pct is not None else "cloud cover unknown"
+    rain_text = f"{slot.total_rain_mm:.1f}mm rain expected" if slot.total_rain_mm >= RAIN_THRESHOLD_MM else "no significant rain expected"
     event.add(
         "description",
-        f"Model: {slot.model}. Generated {now:%Y-%m-%d %H:%M} UTC by wind-cal. "
+        f"{rain_text}, {cloud_text}. Model: {slot.model}. Generated {now:%Y-%m-%d %H:%M} UTC by wind-cal. "
         f"Forecasts change — re-checked hourly. {windguru_url}",
     )
     event.add("x-windcal-avg-kt", f"{round(slot.avg_wind_kt, 1)}")
     event.add("x-windcal-gust-kt", f"{round(slot.max_gust_kt, 1)}")
     event.add("x-windcal-direction", direction)
     event.add("x-windcal-model", slot.model)
+    event.add("x-windcal-rain-mm", f"{round(slot.total_rain_mm, 1)}")
+    event.add("x-windcal-cloud-pct", f"{round(slot.avg_cloud_cover_pct, 1)}" if slot.avg_cloud_cover_pct is not None else "")
 
 
 def _new_event(uid: str, slot: Timeslot, spot_id: int, spot_name: str, now: datetime) -> Event:
@@ -80,6 +98,8 @@ def _content_key(event: Event) -> tuple:
         str(event["X-WINDCAL-GUST-KT"]),
         str(event["X-WINDCAL-DIRECTION"]),
         str(event.get("X-WINDCAL-MODEL", "")),
+        str(event.get("X-WINDCAL-RAIN-MM", "")),
+        str(event.get("X-WINDCAL-CLOUD-PCT", "")),
     )
 
 
@@ -90,6 +110,8 @@ def _content_key_from_slot(slot: Timeslot) -> tuple:
         f"{round(slot.max_gust_kt, 1)}",
         slot.direction or "?",
         slot.model,
+        f"{round(slot.total_rain_mm, 1)}",
+        f"{round(slot.avg_cloud_cover_pct, 1)}" if slot.avg_cloud_cover_pct is not None else "",
     )
 
 

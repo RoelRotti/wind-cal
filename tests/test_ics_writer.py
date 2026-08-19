@@ -8,10 +8,66 @@ from ics_writer import build_calendar
 T0 = datetime(2026, 1, 1, 12, 0, tzinfo=timezone.utc)
 
 
-def slot(hour_offset, duration_hours, avg=17.0, gust=20.0, direction="W", model="TEST"):
+def slot(hour_offset, duration_hours, avg=17.0, gust=20.0, direction="W", model="TEST", rain_mm=0.0, cloud_pct=None):
     start = T0 + timedelta(hours=hour_offset)
     end = start + timedelta(hours=duration_hours)
-    return Timeslot(start=start, end=end, avg_wind_kt=avg, max_gust_kt=gust, direction=direction, model=model)
+    return Timeslot(
+        start=start, end=end, avg_wind_kt=avg, max_gust_kt=gust, direction=direction, model=model,
+        total_rain_mm=rain_mm, avg_cloud_cover_pct=cloud_pct,
+    )
+
+
+def _summary(ics_bytes):
+    return str(list(Calendar.from_ical(ics_bytes).walk("VEVENT"))[0]["SUMMARY"])
+
+
+def _description(ics_bytes):
+    return str(list(Calendar.from_ical(ics_bytes).walk("VEVENT"))[0]["DESCRIPTION"])
+
+
+def test_weather_emoji_is_last_line_of_title_when_rain_expected():
+    slots = [slot(0, 3, rain_mm=2.0, cloud_pct=80.0)]
+    summary = _summary(build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0))
+    assert summary.endswith("\n🌧️")
+
+
+def test_weather_emoji_is_sun_when_clear_and_dry():
+    slots = [slot(0, 3, rain_mm=0.0, cloud_pct=10.0)]
+    summary = _summary(build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0))
+    assert summary.endswith("\n☀️")
+
+
+def test_weather_emoji_omitted_when_no_cloud_data_and_no_rain():
+    slots = [slot(0, 3, rain_mm=0.0, cloud_pct=None)]
+    summary = _summary(build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0))
+    assert "☀️" not in summary and "⛅" not in summary and "☁️" not in summary and "🌧️" not in summary
+    assert summary.endswith(slots[0].direction or "?")  # title ends at direction, no trailing weather line
+
+
+def test_description_states_rain_and_cloud_details():
+    slots = [slot(0, 3, rain_mm=3.2, cloud_pct=64.0)]
+    description = _description(build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0))
+    assert "3.2mm rain expected" in description
+    assert "64% cloud cover" in description
+
+
+def test_description_says_no_significant_rain_below_threshold():
+    slots = [slot(0, 3, rain_mm=0.1, cloud_pct=50.0)]
+    description = _description(build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0))
+    assert "no significant rain expected" in description
+
+
+def test_rain_only_change_bumps_sequence():
+    original = [slot(0, 3, rain_mm=0.0, cloud_pct=50.0)]
+    ics1 = build_calendar(original, 1, "Test Spot", "Test Cal", None, T0)
+
+    rainier = [slot(0, 3, rain_mm=5.0, cloud_pct=50.0)]
+    ics2 = build_calendar(rainier, 1, "Test Spot", "Test Cal", ics1, T0 + timedelta(hours=1))
+
+    events1 = list(Calendar.from_ical(ics1).walk("VEVENT"))
+    events2 = list(Calendar.from_ical(ics2).walk("VEVENT"))
+    assert int(events1[0]["SEQUENCE"]) == 0
+    assert int(events2[0]["SEQUENCE"]) == 1
 
 
 def test_wind_emoji_count_matches_displayed_rounded_number():

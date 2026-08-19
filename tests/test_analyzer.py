@@ -6,7 +6,7 @@ from scraper import ForecastPoint
 T0 = datetime(2026, 1, 1, 0, 0, tzinfo=timezone.utc)
 
 
-def pt(hour_offset, duration_hours, wind, gust=None, direction="W", model="TEST"):
+def pt(hour_offset, duration_hours, wind, gust=None, direction="W", model="TEST", rain_mm=0.0, cloud_cover_pct=None):
     start = T0 + timedelta(hours=hour_offset)
     end = start + timedelta(hours=duration_hours)
     return ForecastPoint(
@@ -16,6 +16,8 @@ def pt(hour_offset, duration_hours, wind, gust=None, direction="W", model="TEST"
         gust_kt=gust if gust is not None else wind + 2,
         direction=direction,
         model=model,
+        rain_mm=rain_mm,
+        cloud_cover_pct=cloud_cover_pct,
     )
 
 
@@ -67,6 +69,29 @@ def test_duration_weighted_average_across_resolution_change():
     expected_avg = (20 * 1 + 16 * 3 + 16 * 3) / 7
     assert abs(slots[0].avg_wind_kt - expected_avg) < 1e-9
     assert slots[0].end - slots[0].start == timedelta(hours=7)
+
+
+def test_total_rain_mm_sums_across_the_run():
+    points = [pt(0, 1, 18, rain_mm=0.5), pt(1, 1, 18, rain_mm=1.2), pt(2, 1, 18, rain_mm=0.0)]
+    slots = find_windy_timeslots(points, min_avg_wind_kt=16.0, min_duration_hours=3.0)
+    assert slots[0].total_rain_mm == 1.7
+
+
+def test_avg_cloud_cover_is_duration_weighted_and_skips_missing():
+    p1 = pt(0, 1, 18, cloud_cover_pct=100.0)      # 1-hour step
+    p2 = ForecastPoint(p1.end, p1.end + timedelta(hours=3), 18, 20, "W", "TEST", 0.0, 0.0)  # 3-hour step, 0% cloud
+    p3 = ForecastPoint(p2.end, p2.end + timedelta(hours=1), 18, 20, "W", "TEST", 0.0, None)  # missing -> excluded
+
+    slots = find_windy_timeslots([p1, p2, p3], min_avg_wind_kt=16.0, min_duration_hours=3.0)
+    assert len(slots) == 1
+    # weighted by duration: (100*1 + 0*3) / (1+3) = 25, the missing point contributes nothing
+    assert slots[0].avg_cloud_cover_pct == 25.0
+
+
+def test_avg_cloud_cover_is_none_when_entirely_missing():
+    points = [pt(0, 1, 18), pt(1, 1, 18), pt(2, 1, 18)]  # cloud_cover_pct defaults to None
+    slots = find_windy_timeslots(points, min_avg_wind_kt=16.0, min_duration_hours=3.0)
+    assert slots[0].avg_cloud_cover_pct is None
 
 
 def test_run_spanning_two_models_labels_both_in_order():

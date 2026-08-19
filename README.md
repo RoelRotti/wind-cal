@@ -13,10 +13,14 @@ at least 3 hours. Both configurable in `config.toml`.
    `micro.windguru.cz` endpoint (a documented integration endpoint, not the
    main site) for the configured spot + model.
 2. `analyzer.py` finds contiguous runs where every point is above the wind
-   threshold and the run lasts long enough.
+   threshold and the run lasts long enough, and aggregates each run's total
+   rain and average cloud cover alongside the wind numbers.
 3. `ics_writer.py` updates `docs/wijk-aan-zee-wind.ics` in place — new windy
    slots are added, changed ones are updated, stale ones are removed. Existing
-   unaffected events are left byte-identical.
+   unaffected events are left byte-identical. Each event's title ends with a
+   weather emoji (🌧️ if measurable rain is expected, else ☀️/⛅/☁️ by cloud
+   cover), and the description spells out the exact rain (mm) and cloud (%)
+   figures plus which forecast model(s) it's based on.
 4. A GitHub Actions workflow runs this hourly and commits the result, which
    is then reachable at a stable `raw.githubusercontent.com` URL.
 
@@ -75,6 +79,11 @@ sensitive to `config.toml`'s `calendar_name` or event content.
 - `thresholds.min_avg_wind_kt` / `thresholds.min_duration_hours` — the windy-slot
   criteria
 - `output.*` — where the `.ics` and status files are written
+
+The rain-vs-dry cutoff (0.5mm) and cloud-cover emoji tiers (<30% ☀️, 30-70% ⛅,
+>70% ☁️) aren't in `config.toml` yet — they're constants near the top of
+`ics_writer.py` (`RAIN_THRESHOLD_MM` and the tier checks in `_weather_emoji`)
+if you want to tune them.
 
 ## If it stops updating
 

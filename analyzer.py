@@ -12,6 +12,8 @@ class Timeslot:
     max_gust_kt: float
     direction: str | None
     model: str
+    total_rain_mm: float = 0.0
+    avg_cloud_cover_pct: float | None = None
 
 
 def find_windy_timeslots(
@@ -61,6 +63,9 @@ def _summarize(run: list[ForecastPoint], start: datetime, end: datetime) -> Time
         if p.model not in models:
             models.append(p.model)
 
+    cloud_samples = [(p.cloud_cover_pct, (p.end - p.start).total_seconds()) for p in run if p.cloud_cover_pct is not None]
+    cloud_weight = sum(w for _, w in cloud_samples)
+
     return Timeslot(
         start=start,
         end=end,
@@ -68,4 +73,6 @@ def _summarize(run: list[ForecastPoint], start: datetime, end: datetime) -> Time
         max_gust_kt=max(p.gust_kt for p in run),
         direction=peak_point.direction,
         model=", ".join(models),
+        total_rain_mm=sum(p.rain_mm for p in run),
+        avg_cloud_cover_pct=sum(v * w for v, w in cloud_samples) / cloud_weight if cloud_weight else None,
     )
