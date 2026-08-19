@@ -13,9 +13,11 @@ def _uid(spot_id: int, start: datetime) -> str:
     return f"windcal-{spot_id}-{start_utc:%Y%m%dT%H%M%SZ}@wind-cal.local"
 
 
-def _wind_emoji(avg_wind_kt: float) -> str:
-    """1 emoji per 5kt of average wind, starting at 15kt (15-20 -> 1, 20-25 -> 2, ...)."""
-    count = max(0, int((avg_wind_kt - 15) // 5) + 1)
+def _wind_emoji(avg_wind_kt_rounded: int) -> str:
+    """1 emoji per 5kt of average wind, starting at 15kt (15-20 -> 1, 20-25 -> 2, ...).
+    Takes the already-rounded, displayed value so the emoji count always matches
+    what's shown next to it (e.g. 19.5 displayed as "20" must bucket as 20, not 19)."""
+    count = max(0, (avg_wind_kt_rounded - 15) // 5 + 1)
     return WIND_EMOJI * count
 
 
@@ -34,11 +36,13 @@ def _apply_content(event: Event, slot: Timeslot, spot_id: int, spot_name: str, n
     event.add("dtend", slot.end.astimezone(timezone.utc))
     event.add("dtstamp", now)
     event.add("status", "CONFIRMED")
+    avg_display = round(slot.avg_wind_kt)
+    gust_display = round(slot.max_gust_kt)
     event.add(
         "summary",
-        f"{_wind_emoji(slot.avg_wind_kt)}\n"
-        f"{_emoji_number(round(slot.avg_wind_kt))}\n"
-        f"{_emoji_number(round(slot.max_gust_kt))}\n"
+        f"{_wind_emoji(avg_display)}\n"
+        f"{_emoji_number(avg_display)}\n"
+        f"{_emoji_number(gust_display)}\n"
         f"{direction}",
     )
     event.add("location", spot_name)

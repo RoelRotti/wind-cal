@@ -14,6 +14,15 @@ def slot(hour_offset, duration_hours, avg=17.0, gust=20.0, direction="W", model=
     return Timeslot(start=start, end=end, avg_wind_kt=avg, max_gust_kt=gust, direction=direction, model=model)
 
 
+def test_wind_emoji_count_matches_displayed_rounded_number():
+    # 19.5 rounds to "20" for display (Python's round-half-to-even) -> must
+    # bucket as 20 (2 emoji), not floor to the raw 19.5 (which would be 1)
+    slots = [slot(0, 3, avg=19.5)]
+    ics_bytes = build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0)
+    summary = str(list(Calendar.from_ical(ics_bytes).walk("VEVENT"))[0]["SUMMARY"])
+    assert summary.startswith("💨💨\n2️⃣0️⃣")
+
+
 def test_round_trip():
     slots = [slot(0, 3)]
     ics_bytes = build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0)
