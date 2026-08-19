@@ -2,10 +2,10 @@
   "error_message": null,
   "fallback_model": "gfs",
   "ics_changed": true,
-  "last_run_at_utc": "2026-08-19T22:31:55.652206+00:00",
+  "last_run_at_utc": "2026-08-19T23:29:07.576146+00:00",
   "last_run_status": "ok",
-  "last_success_at_utc": "2026-08-19T22:31:55.652206+00:00",
+  "last_success_at_utc": "2026-08-19T23:29:07.576146+00:00",
   "primary_model": "harmnl",
-  "qualifying_timeslots_count": 6,
+  "qualifying_timeslots_count": 5,
   "spot_id": 1120682
 }
