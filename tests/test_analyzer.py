@@ -71,6 +71,14 @@ def test_duration_weighted_average_across_resolution_change():
     assert slots[0].end - slots[0].start == timedelta(hours=7)
 
 
+def test_lone_three_hour_block_at_threshold_does_not_qualify():
+    # A single GFS-resolution (3-hour) point spans only 3 real hours, which is
+    # under the 4-hour minimum even though its wind meets the threshold alone.
+    points = [pt(0, 3, 15)]
+    slots = find_windy_timeslots(points, min_avg_wind_kt=15.0, min_duration_hours=4.0)
+    assert slots == []
+
+
 def test_total_rain_mm_sums_across_the_run():
     points = [pt(0, 1, 18, rain_mm=0.5), pt(1, 1, 18, rain_mm=1.2), pt(2, 1, 18, rain_mm=0.0)]
     slots = find_windy_timeslots(points, min_avg_wind_kt=16.0, min_duration_hours=3.0)

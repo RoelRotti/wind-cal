@@ -12,7 +12,7 @@ primary_model = "harmnl"
 fallback_model = "gfs"
 
 [thresholds]
-min_avg_wind_kt = 16.0
+min_avg_wind_kt = 15.0
 min_duration_hours = 4.0
 
 [output]

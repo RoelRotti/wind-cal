@@ -4,8 +4,8 @@ Scrapes the windguru forecast for a spot, finds timeslots where average wind is
 above a threshold for long enough, and publishes them as a `.ics` calendar feed
 you can subscribe to from Google Calendar.
 
-Default spot: Wijk aan Zee, NL. Default threshold: 16kt average, sustained for
-at least 3 hours. Both configurable in `config.toml`.
+Default spot: Wijk aan Zee, NL. Default threshold: 15kt average, sustained for
+at least 4 hours. Both configurable in `config.toml`.
 
 ## How it works
 
