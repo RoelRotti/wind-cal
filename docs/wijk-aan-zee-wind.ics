@@ -4,19 +4,19 @@ PRODID:-//wind-cal//Wind Forecast Calendar//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:Wijk aan Zee Wind
 BEGIN:VEVENT
-SUMMARY:💨\n1️⃣6️⃣\n2️⃣7️⃣\nE\n⛅
+SUMMARY:💨\n1️⃣6️⃣\n2️⃣7️⃣\nE\n☁️
 DTSTART:20260825T080000Z
 DTEND:20260825T160000Z
-DTSTAMP:20260823T143019Z
+DTSTAMP:20260823T152931Z
 UID:windcal-1120682-20260825T080000Z@wind-cal.local
-SEQUENCE:12
-DESCRIPTION:no significant rain expected\, 56% cloud cover. Model: HARM-NL
-  2 km. Generated 2026-08-23 14:30 UTC by wind-cal. Forecasts change — re
+SEQUENCE:13
+DESCRIPTION:no significant rain expected\, 94% cloud cover. Model: HARM-NL
+  2 km. Generated 2026-08-23 15:29 UTC by wind-cal. Forecasts change — re
  -checked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:15.9
-X-WINDCAL-CLOUD-PCT:56.4
+X-WINDCAL-AVG-KT:16.1
+X-WINDCAL-CLOUD-PCT:93.6
 X-WINDCAL-DIRECTION:E
 X-WINDCAL-GUST-KT:27.0
 X-WINDCAL-MODEL:HARM-NL 2 km
