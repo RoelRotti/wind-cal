@@ -7,16 +7,16 @@ BEGIN:VEVENT
 SUMMARY:💨\n1️⃣5️⃣\n2️⃣5️⃣\nE\n⛅
 DTSTART:20260825T090000Z
 DTEND:20260825T140000Z
-DTSTAMP:20260824T113617Z
+DTSTAMP:20260824T130425Z
 UID:windcal-1120682-20260825T090000Z@wind-cal.local
-SEQUENCE:3
-DESCRIPTION:no significant rain expected\, 46% cloud cover. Model: HARM-NL
-  2 km. Generated 2026-08-24 11:36 UTC by wind-cal. Forecasts change — re
+SEQUENCE:4
+DESCRIPTION:no significant rain expected\, 51% cloud cover. Model: HARM-NL
+  2 km. Generated 2026-08-24 13:04 UTC by wind-cal. Forecasts change — re
  -checked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:15.4
-X-WINDCAL-CLOUD-PCT:45.6
+X-WINDCAL-AVG-KT:15.2
+X-WINDCAL-CLOUD-PCT:51.4
 X-WINDCAL-DIRECTION:E
 X-WINDCAL-GUST-KT:25.0
 X-WINDCAL-MODEL:HARM-NL 2 km
