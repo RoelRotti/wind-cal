@@ -4,41 +4,41 @@ PRODID:-//wind-cal//Wind Forecast Calendar//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:Wijk aan Zee Wind
 BEGIN:VEVENT
-SUMMARY:💨\n1️⃣9️⃣\n2️⃣9️⃣\nWSW\n☁️
-DTSTART:20260912T190000Z
+SUMMARY:💨\n1️⃣9️⃣\n2️⃣9️⃣\nWSW\n🌧️
+DTSTART:20260912T210000Z
 DTEND:20260913T040000Z
-DTSTAMP:20260912T225619Z
-UID:windcal-1120682-20260912T190000Z@wind-cal.local
+DTSTAMP:20260913T004922Z
+UID:windcal-1120682-20260912T210000Z@wind-cal.local
 SEQUENCE:0
-DESCRIPTION:no significant rain expected\, 100% cloud cover. Model: HARM-N
- L 2 km. Generated 2026-09-12 22:56 UTC by wind-cal. Forecasts change — r
- e-checked hourly. https://www.windguru.cz/1120682
+DESCRIPTION:1.0mm rain expected\, 100% cloud cover. Model: HARM-NL 2 km. G
+ enerated 2026-09-13 00:49 UTC by wind-cal. Forecasts change — re-checked
+  hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:19.2
+X-WINDCAL-AVG-KT:19.3
 X-WINDCAL-CLOUD-PCT:100.0
 X-WINDCAL-DIRECTION:WSW
 X-WINDCAL-GUST-KT:29.0
 X-WINDCAL-MODEL:HARM-NL 2 km
-X-WINDCAL-RAIN-MM:0.0
+X-WINDCAL-RAIN-MM:1.0
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:💨\n1️⃣5️⃣\n2️⃣2️⃣\nSW\n☁️
-DTSTART:20260915T060000Z
+SUMMARY:💨\n1️⃣6️⃣\n2️⃣2️⃣\nSW\n☁️
+DTSTART:20260915T100000Z
 DTEND:20260915T140000Z
-DTSTAMP:20260912T225619Z
-UID:windcal-1120682-20260915T060000Z@wind-cal.local
+DTSTAMP:20260913T004922Z
+UID:windcal-1120682-20260915T100000Z@wind-cal.local
 SEQUENCE:0
-DESCRIPTION:no significant rain expected\, 88% cloud cover. Model: HARM-NL
-  2 km\, GFS 13 km. Generated 2026-09-12 22:56 UTC by wind-cal. Forecasts c
- hange — re-checked hourly. https://www.windguru.cz/1120682
+DESCRIPTION:no significant rain expected\, 98% cloud cover. Model: GFS 13 
+ km. Generated 2026-09-13 00:49 UTC by wind-cal. Forecasts change — re-ch
+ ecked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:15.4
-X-WINDCAL-CLOUD-PCT:88.4
+X-WINDCAL-AVG-KT:15.5
+X-WINDCAL-CLOUD-PCT:98.0
 X-WINDCAL-DIRECTION:SW
 X-WINDCAL-GUST-KT:22.0
-X-WINDCAL-MODEL:HARM-NL 2 km, GFS 13 km
+X-WINDCAL-MODEL:GFS 13 km
 X-WINDCAL-RAIN-MM:0.0
 END:VEVENT
 BEGIN:VEVENT
