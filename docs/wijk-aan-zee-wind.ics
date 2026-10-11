@@ -4,19 +4,19 @@ PRODID:-//wind-cal//Wind Forecast Calendar//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:Wijk aan Zee Wind
 BEGIN:VEVENT
-SUMMARY:💨💨\n2️⃣0️⃣\n3️⃣2️⃣\nSW\n⛅
+SUMMARY:💨\n1️⃣9️⃣\n3️⃣2️⃣\nSW\n⛅
 DTSTART:20261013T100000Z
 DTEND:20261014T020000Z
-DTSTAMP:20261011T184557Z
+DTSTAMP:20261011T224551Z
 UID:windcal-1120682-20261013T100000Z@wind-cal.local
-SEQUENCE:0
-DESCRIPTION:no significant rain expected\, 53% cloud cover. Model: HARM-NL
-  2 km. Generated 2026-10-11 18:45 UTC by wind-cal. Forecasts change — re
+SEQUENCE:1
+DESCRIPTION:no significant rain expected\, 66% cloud cover. Model: HARM-NL
+  2 km. Generated 2026-10-11 22:45 UTC by wind-cal. Forecasts change — re
  -checked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:19.7
-X-WINDCAL-CLOUD-PCT:52.8
+X-WINDCAL-AVG-KT:18.8
+X-WINDCAL-CLOUD-PCT:65.8
 X-WINDCAL-DIRECTION:SW
 X-WINDCAL-GUST-KT:32.0
 X-WINDCAL-MODEL:HARM-NL 2 km
@@ -42,21 +42,21 @@ X-WINDCAL-MODEL:GFS 13 km
 X-WINDCAL-RAIN-MM:2.0
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:💨\n1️⃣5️⃣\n1️⃣8️⃣\nN\n☀️
+SUMMARY:💨\n1️⃣5️⃣\n1️⃣6️⃣\nN\n☀️
 DTSTART:20261017T180000Z
 DTEND:20261018T000000Z
-DTSTAMP:20261011T184557Z
+DTSTAMP:20261011T224551Z
 UID:windcal-1120682-20261017T180000Z@wind-cal.local
-SEQUENCE:0
+SEQUENCE:1
 DESCRIPTION:no significant rain expected\, 11% cloud cover. Model: GFS 13 
- km. Generated 2026-10-11 18:45 UTC by wind-cal. Forecasts change — re-ch
+ km. Generated 2026-10-11 22:45 UTC by wind-cal. Forecasts change — re-ch
  ecked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
 X-WINDCAL-AVG-KT:15.0
 X-WINDCAL-CLOUD-PCT:11.4
 X-WINDCAL-DIRECTION:N
-X-WINDCAL-GUST-KT:18.0
+X-WINDCAL-GUST-KT:16.0
 X-WINDCAL-MODEL:GFS 13 km
 X-WINDCAL-RAIN-MM:0.0
 END:VEVENT
