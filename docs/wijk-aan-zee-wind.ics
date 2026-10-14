@@ -4,98 +4,135 @@ PRODID:-//wind-cal//Wind Forecast Calendar//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:Wijk aan Zee Wind
 BEGIN:VEVENT
-SUMMARY:💨\n1️⃣6️⃣\n2️⃣4️⃣\nSSW\n☁️
-DTSTART:20261015T100000Z
+SUMMARY:💨\n1️⃣6️⃣\n2️⃣3️⃣\nSSW ↗️\n☁️\n17°C / 
+ 🌊16°C
+DTSTART:20261015T110000Z
 DTEND:20261015T150000Z
-DTSTAMP:20261014T100141Z
-UID:windcal-1120682-20261015T100000Z@wind-cal.local
+DTSTAMP:20261014T120249Z
+UID:windcal-1120682-20261015T110000Z@wind-cal.local
 SEQUENCE:0
-DESCRIPTION:no significant rain expected\, 100% cloud cover. Model: HARM-N
- L 2 km. Generated 2026-10-14 10:01 UTC by wind-cal. Forecasts change — r
- e-checked hourly. https://www.windguru.cz/1120682
+DESCRIPTION:no significant rain expected\, 96% cloud cover\, 17°C\, sea 1
+ 6°C. Model: HARM-NL 2 km. Generated 2026-10-14 12:02 UTC by wind-cal. For
+ ecasts change — re-checked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:15.6
-X-WINDCAL-CLOUD-PCT:99.5
-X-WINDCAL-DIRECTION:SSW
-X-WINDCAL-GUST-KT:24.0
+X-WINDCAL-AVG-KT:15.5
+X-WINDCAL-CLOUD-PCT:96.5
+X-WINDCAL-DIRECTION:SSW ↗️
+X-WINDCAL-GUST-KT:23.0
 X-WINDCAL-MODEL:HARM-NL 2 km
 X-WINDCAL-RAIN-MM:0.0
+X-WINDCAL-SEA-TEMP-C:16
+X-WINDCAL-TEMP-C:17
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:💨\n1️⃣8️⃣\n3️⃣0️⃣\nNNW\n🌧️
-DTSTART:20261016T100000Z
-DTEND:20261017T180000Z
-DTSTAMP:20261014T100141Z
-UID:windcal-1120682-20261016T100000Z@wind-cal.local
+SUMMARY:💨\n1️⃣8️⃣\n2️⃣9️⃣\nNNW ↘️\n🌧️\n14°C /
+  🌊16°C
+DTSTART:20261016T090000Z
+DTEND:20261017T210000Z
+DTSTAMP:20261014T120249Z
+UID:windcal-1120682-20261016T090000Z@wind-cal.local
 SEQUENCE:0
-DESCRIPTION:3.0mm rain expected\, 88% cloud cover. Model: HARM-NL 2 km\, G
- FS 13 km. Generated 2026-10-14 10:01 UTC by wind-cal. Forecasts change —
-  re-checked hourly. https://www.windguru.cz/1120682
+DESCRIPTION:3.0mm rain expected\, 74% cloud cover\, 14°C\, sea 16°C. Mod
+ el: HARM-NL 2 km\, GFS 13 km. Generated 2026-10-14 12:02 UTC by wind-cal. 
+ Forecasts change — re-checked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:18.1
-X-WINDCAL-CLOUD-PCT:88.3
-X-WINDCAL-DIRECTION:NNW
-X-WINDCAL-GUST-KT:30.0
+X-WINDCAL-AVG-KT:17.9
+X-WINDCAL-CLOUD-PCT:73.7
+X-WINDCAL-DIRECTION:NNW ↘️
+X-WINDCAL-GUST-KT:29.0
 X-WINDCAL-MODEL:HARM-NL 2 km, GFS 13 km
 X-WINDCAL-RAIN-MM:3.0
+X-WINDCAL-SEA-TEMP-C:16
+X-WINDCAL-TEMP-C:14
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:💨\n1️⃣6️⃣\n3️⃣0️⃣\nE\n⛅
-DTSTART:20261019T150000Z
-DTEND:20261021T180000Z
-DTSTAMP:20261014T100141Z
-UID:windcal-1120682-20261019T150000Z@wind-cal.local
+SUMMARY:💨\n1️⃣7️⃣\n3️⃣0️⃣\nE ⬅️\n☀️\n14°C / 
+ 🌊16°C
+DTSTART:20261019T060000Z
+DTEND:20261020T000000Z
+DTSTAMP:20261014T120249Z
+UID:windcal-1120682-20261019T060000Z@wind-cal.local
 SEQUENCE:0
-DESCRIPTION:no significant rain expected\, 30% cloud cover. Model: GFS 13 
- km. Generated 2026-10-14 10:01 UTC by wind-cal. Forecasts change — re-ch
- ecked hourly. https://www.windguru.cz/1120682
+DESCRIPTION:no significant rain expected\, 15% cloud cover\, 14°C\, sea 1
+ 6°C. Model: GFS 13 km. Generated 2026-10-14 12:02 UTC by wind-cal. Foreca
+ sts change — re-checked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:16.4
-X-WINDCAL-CLOUD-PCT:30.0
-X-WINDCAL-DIRECTION:E
+X-WINDCAL-AVG-KT:16.8
+X-WINDCAL-CLOUD-PCT:14.8
+X-WINDCAL-DIRECTION:E ⬅️
 X-WINDCAL-GUST-KT:30.0
 X-WINDCAL-MODEL:GFS 13 km
 X-WINDCAL-RAIN-MM:0.0
+X-WINDCAL-SEA-TEMP-C:16
+X-WINDCAL-TEMP-C:14
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:💨💨\n2️⃣3️⃣\n4️⃣7️⃣\nSSE\n🌧️
+SUMMARY:💨\n1️⃣6️⃣\n2️⃣8️⃣\nE ⬅️\n☀️\n12°C / 
+ 🌊16°C
+DTSTART:20261020T060000Z
+DTEND:20261021T210000Z
+DTSTAMP:20261014T120249Z
+UID:windcal-1120682-20261020T060000Z@wind-cal.local
+SEQUENCE:0
+DESCRIPTION:no significant rain expected\, 3% cloud cover\, 12°C\, sea 16
+ °C. Model: GFS 13 km. Generated 2026-10-14 12:02 UTC by wind-cal. Forecas
+ ts change — re-checked hourly. https://www.windguru.cz/1120682
+LOCATION:Wijk aan Zee\, NL
+STATUS:CONFIRMED
+X-WINDCAL-AVG-KT:16.0
+X-WINDCAL-CLOUD-PCT:2.8
+X-WINDCAL-DIRECTION:E ⬅️
+X-WINDCAL-GUST-KT:28.0
+X-WINDCAL-MODEL:GFS 13 km
+X-WINDCAL-RAIN-MM:0.0
+X-WINDCAL-SEA-TEMP-C:16
+X-WINDCAL-TEMP-C:12
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:💨💨\n2️⃣3️⃣\n4️⃣7️⃣\nSSE ↖️\n🌧️\n13
+ °C / 🌊16°C
 DTSTART:20261026T210000Z
 DTEND:20261028T060000Z
-DTSTAMP:20261014T100141Z
+DTSTAMP:20261014T120249Z
 UID:windcal-1120682-20261026T210000Z@wind-cal.local
-SEQUENCE:0
-DESCRIPTION:16.0mm rain expected\, 88% cloud cover. Model: GFS 13 km. Gene
- rated 2026-10-14 10:01 UTC by wind-cal. Forecasts change — re-checked ho
- urly. https://www.windguru.cz/1120682
+SEQUENCE:1
+DESCRIPTION:16.0mm rain expected\, 88% cloud cover\, 13°C\, sea 16°C. Mo
+ del: GFS 13 km. Generated 2026-10-14 12:02 UTC by wind-cal. Forecasts chan
+ ge — re-checked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
 X-WINDCAL-AVG-KT:22.7
 X-WINDCAL-CLOUD-PCT:88.0
-X-WINDCAL-DIRECTION:SSE
+X-WINDCAL-DIRECTION:SSE ↖️
 X-WINDCAL-GUST-KT:47.0
 X-WINDCAL-MODEL:GFS 13 km
 X-WINDCAL-RAIN-MM:16.0
+X-WINDCAL-SEA-TEMP-C:16
+X-WINDCAL-TEMP-C:13
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:💨\n1️⃣9️⃣\n2️⃣6️⃣\nWNW\n☁️
+SUMMARY:💨\n1️⃣9️⃣\n2️⃣6️⃣\nWNW ➡️\n☁️\n14°C / 
+ 🌊16°C
 DTSTART:20261028T180000Z
 DTEND:20261029T030000Z
-DTSTAMP:20261014T100141Z
+DTSTAMP:20261014T120249Z
 UID:windcal-1120682-20261028T180000Z@wind-cal.local
-SEQUENCE:0
-DESCRIPTION:no significant rain expected\, 88% cloud cover. Model: GFS 13 
- km. Generated 2026-10-14 10:01 UTC by wind-cal. Forecasts change — re-ch
- ecked hourly. https://www.windguru.cz/1120682
+SEQUENCE:1
+DESCRIPTION:no significant rain expected\, 88% cloud cover\, 14°C\, sea 1
+ 6°C. Model: GFS 13 km. Generated 2026-10-14 12:02 UTC by wind-cal. Foreca
+ sts change — re-checked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
 X-WINDCAL-AVG-KT:18.7
 X-WINDCAL-CLOUD-PCT:87.9
-X-WINDCAL-DIRECTION:WNW
+X-WINDCAL-DIRECTION:WNW ➡️
 X-WINDCAL-GUST-KT:26.0
 X-WINDCAL-MODEL:GFS 13 km
 X-WINDCAL-RAIN-MM:0.0
+X-WINDCAL-SEA-TEMP-C:16
+X-WINDCAL-TEMP-C:14
 END:VEVENT
 END:VCALENDAR
