@@ -14,6 +14,9 @@ class Timeslot:
     model: str
     total_rain_mm: float = 0.0
     avg_cloud_cover_pct: float | None = None
+    direction_deg: float | None = None
+    avg_temp_c: float | None = None
+    sea_temp_c: float | None = None
 
 
 def find_windy_timeslots(
@@ -53,6 +56,13 @@ def find_windy_timeslots(
     return timeslots
 
 
+def _weighted_avg(run: list[ForecastPoint], field: str) -> float | None:
+    """Time-weighted average of an optional per-point value, ignoring points that lack it."""
+    samples = [(getattr(p, field), (p.end - p.start).total_seconds()) for p in run if getattr(p, field) is not None]
+    weight = sum(w for _, w in samples)
+    return sum(v * w for v, w in samples) / weight if weight else None
+
+
 def _summarize(run: list[ForecastPoint], start: datetime, end: datetime) -> Timeslot:
     total_seconds = sum((p.end - p.start).total_seconds() for p in run)
     weighted_wind = sum(p.wind_avg_kt * (p.end - p.start).total_seconds() for p in run)
@@ -63,8 +73,6 @@ def _summarize(run: list[ForecastPoint], start: datetime, end: datetime) -> Time
         if p.model not in models:
             models.append(p.model)
 
-    cloud_samples = [(p.cloud_cover_pct, (p.end - p.start).total_seconds()) for p in run if p.cloud_cover_pct is not None]
-    cloud_weight = sum(w for _, w in cloud_samples)
 
     return Timeslot(
         start=start,
@@ -74,5 +82,8 @@ def _summarize(run: list[ForecastPoint], start: datetime, end: datetime) -> Time
         direction=peak_point.direction,
         model=", ".join(models),
         total_rain_mm=sum(p.rain_mm for p in run),
-        avg_cloud_cover_pct=sum(v * w for v, w in cloud_samples) / cloud_weight if cloud_weight else None,
+        avg_cloud_cover_pct=_weighted_avg(run, "cloud_cover_pct"),
+        direction_deg=peak_point.direction_deg,
+        avg_temp_c=_weighted_avg(run, "temp_c"),
+        sea_temp_c=_weighted_avg(run, "sea_temp_c"),
     )

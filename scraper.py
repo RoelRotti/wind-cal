@@ -8,10 +8,11 @@ from zoneinfo import ZoneInfo
 BASE_URL = "http://micro.windguru.cz/"
 USER_AGENT = "wind-cal/1.0 (personal wind-forecast calendar; single spot, hourly polling)"
 TIMEOUT_SECONDS = 15
-VARIABLES = "WSPD,GUST,WDIRN,APCP,APCP1,HCLD,MCLD,LCLD"
+VARIABLES = "WSPD,GUST,WDIRN,WDEG,TMP,APCP,APCP1,HCLD,MCLD,LCLD"
 
 MODEL_HEADER_RE = re.compile(r"^(?P<model>.+?)\s*\(init:\s*(?P<date>\d{4}-\d{2}-\d{2})\s+(?P<hour>\d{2})\s*UTC\)\s*$")
 COLUMN_HEADER_RE = re.compile(r"^\s*Date\s+(?P<names>.+)$")
+SST_RE = re.compile(r"SST:\s*(?P<sst>-?\d+(?:\.\d+)?)\s*C\b")
 DATE_PREFIX_RE = re.compile(r"^\s*[A-Za-z]{3}\s+(?P<day>\d{1,2})\.\s+(?P<hour>\d{2})h\s*(?P<rest>.*)$")
 
 
@@ -25,6 +26,9 @@ class ForecastPoint:
     model: str
     rain_mm: float = 0.0
     cloud_cover_pct: float | None = None
+    direction_deg: float | None = None
+    temp_c: float | None = None
+    sea_temp_c: float | None = None
 
 
 class ScraperError(Exception):
@@ -134,10 +138,14 @@ def parse_forecast(html: str, timezone: ZoneInfo) -> list[ForecastPoint]:
     if not rows_raw:
         raise ScraperParseError("no forecast data rows found in forecast response")
 
-    return _build_points(rows_raw, init_year, init_month, init_day, timezone, model_name)
+    # sea surface temperature is a single value in the response header, not a per-row column
+    sst_match = SST_RE.search(body)
+    sea_temp_c = float(sst_match.group("sst")) if sst_match else None
+
+    return _build_points(rows_raw, init_year, init_month, init_day, timezone, model_name, sea_temp_c)
 
 
-def _build_points(rows_raw, init_year, init_month, init_day, timezone, model_name) -> list[ForecastPoint]:
+def _build_points(rows_raw, init_year, init_month, init_day, timezone, model_name, sea_temp_c) -> list[ForecastPoint]:
     starts = []
     cursor_year, cursor_month = init_year, init_month
     prev_day = init_day
@@ -160,6 +168,7 @@ def _build_points(rows_raw, init_year, init_month, init_day, timezone, model_nam
             end = start + prev_step
 
         wspd, gust, wdirn = values.get("WSPD"), values.get("GUST"), values.get("WDIRN")
+        wdeg, tmp = values.get("WDEG"), values.get("TMP")
         if wspd in (None, "-") or gust in (None, "-"):
             continue  # missing forecast value — treat as a gap, not zero wind
 
@@ -173,6 +182,9 @@ def _build_points(rows_raw, init_year, init_month, init_day, timezone, model_nam
                 model=model_name,
                 rain_mm=_extract_rain_mm(values),
                 cloud_cover_pct=_extract_cloud_cover_pct(values),
+                direction_deg=None if wdeg in (None, "-") else float(wdeg),
+                temp_c=None if tmp in (None, "-") else float(tmp),
+                sea_temp_c=sea_temp_c,
             )
         )
 

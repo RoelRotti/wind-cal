@@ -3,17 +3,18 @@ from datetime import datetime, timedelta, timezone
 from icalendar import Calendar
 
 from analyzer import Timeslot
-from ics_writer import build_calendar
+from ics_writer import _direction_arrow, build_calendar
 
 T0 = datetime(2026, 1, 1, 12, 0, tzinfo=timezone.utc)
 
 
-def slot(hour_offset, duration_hours, avg=17.0, gust=20.0, direction="W", model="TEST", rain_mm=0.0, cloud_pct=None):
+def slot(hour_offset, duration_hours, avg=17.0, gust=20.0, direction="W", model="TEST", rain_mm=0.0, cloud_pct=None, direction_deg=None, temp_c=None, sea_temp_c=None):
     start = T0 + timedelta(hours=hour_offset)
     end = start + timedelta(hours=duration_hours)
     return Timeslot(
         start=start, end=end, avg_wind_kt=avg, max_gust_kt=gust, direction=direction, model=model,
-        total_rain_mm=rain_mm, avg_cloud_cover_pct=cloud_pct,
+        total_rain_mm=rain_mm, avg_cloud_cover_pct=cloud_pct, direction_deg=direction_deg,
+        avg_temp_c=temp_c, sea_temp_c=sea_temp_c,
     )
 
 
@@ -42,6 +43,43 @@ def test_weather_emoji_omitted_when_no_cloud_data_and_no_rain():
     summary = _summary(build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0))
     assert "☀️" not in summary and "⛅" not in summary and "☁️" not in summary and "🌧️" not in summary
     assert summary.endswith(slots[0].direction or "?")  # title ends at direction, no trailing weather line
+
+
+def test_direction_line_shows_downwind_arrow_when_angle_known():
+    slots = [slot(0, 3, direction="WSW", direction_deg=250)]
+    summary = _summary(build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0))
+    assert summary.endswith("\nWSW ➡️")
+
+
+def test_direction_arrow_picks_nearest_of_eight():
+    assert _direction_arrow(240) == "↗️"  # WSW-ish, closer to SW (225) than W (270)
+    assert _direction_arrow(0) == "⬇️"  # wind from N blows south
+    assert _direction_arrow(355) == "⬇️"
+    assert _direction_arrow(None) == ""
+
+
+def test_temperature_is_last_line_of_title():
+    slots = [slot(0, 3, rain_mm=0.0, cloud_pct=10.0, temp_c=14.6)]
+    summary = _summary(build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0))
+    assert summary.endswith("\n☀️\n15°C")
+
+
+def test_sea_temperature_shares_line_with_air_temperature():
+    slots = [slot(0, 3, temp_c=17.0, sea_temp_c=16.0)]
+    summary = _summary(build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0))
+    assert summary.endswith("\n17°C / 🌊16°C")
+
+
+def test_sea_temperature_alone_when_air_unknown():
+    slots = [slot(0, 3, temp_c=None, sea_temp_c=16.0)]
+    summary = _summary(build_calendar(slots, 1, "Test Spot", "Test Cal", None, T0))
+    assert summary.endswith("\n🌊16°C")
+
+
+def test_sub_degree_temperature_change_does_not_bump_sequence():
+    first = build_calendar([slot(0, 3, temp_c=14.2)], 1, "Test Spot", "Test Cal", None, T0)
+    second = build_calendar([slot(0, 3, temp_c=14.4)], 1, "Test Spot", "Test Cal", first, T0 + timedelta(hours=1))
+    assert second == first
 
 
 def test_description_states_rain_and_cloud_details():

@@ -33,6 +33,7 @@ def test_parses_fixture_into_points():
     assert first.wind_avg_kt == 7.0
     assert first.gust_kt == 10.0
     assert first.direction == "W"
+    assert first.sea_temp_c == 21.0  # from the "SST: 21 C" header line
 
 
 def test_missing_weather_columns_default_gracefully():
@@ -83,6 +84,26 @@ def test_month_rollover_handled():
     points = parse_forecast(FIXTURE.read_text(), AMS)
     months = {p.start.month for p in points}
     assert 8 in months and 9 in months  # fixture spans Aug -> Sep
+
+
+def test_parses_wdeg_and_tmp():
+    html = (
+        "<pre>GFS 13 km (init: 2026-01-01 00 UTC)\n"
+        "Date WSPD GUST WDIRN WDEG TMP\n(UTC+1) knots knots dir. deg C\n"
+        " Wed 1. 00h 10 14 WSW 248 12\n"
+        " Wed 1. 01h 11 15 W - -\n</pre>"
+    )
+    points = parse_forecast(html, AMS)
+    assert points[0].direction_deg == 248.0
+    assert points[1].direction_deg is None
+    assert points[0].temp_c == 12.0
+    assert points[1].temp_c is None
+    assert points[0].sea_temp_c is None  # no SST in this response's header
+
+
+def test_fixture_without_wdeg_column_has_no_direction_deg():
+    points = parse_forecast(FIXTURE.read_text(), AMS)
+    assert all(p.direction_deg is None for p in points)
 
 
 def test_missing_pre_block_raises_parse_error():
