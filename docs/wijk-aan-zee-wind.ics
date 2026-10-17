@@ -4,71 +4,27 @@ PRODID:-//wind-cal//Wind Forecast Calendar//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:Wijk aan Zee Wind
 BEGIN:VEVENT
-SUMMARY:💨\n1️⃣5️⃣\n2️⃣6️⃣\nE ⬅️\n☁️\n12°C / 
+SUMMARY:💨\n1️⃣7️⃣\n2️⃣7️⃣\nE ⬅️\n☁️\n10°C / 
  🌊16°C
-DTSTART:20261018T210000Z
-DTEND:20261019T020000Z
-DTSTAMP:20261017T191352Z
-UID:windcal-1120682-20261018T210000Z@wind-cal.local
-SEQUENCE:0
-DESCRIPTION:no significant rain expected\, 100% cloud cover\, 12°C\, sea 
- 16°C. Model: HARM-NL 2 km. Generated 2026-10-17 19:13 UTC by wind-cal. Fo
- recasts change — re-checked hourly. https://www.windguru.cz/1120682
-LOCATION:Wijk aan Zee\, NL
-STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:15.4
-X-WINDCAL-CLOUD-PCT:100.0
-X-WINDCAL-DIRECTION:E ⬅️
-X-WINDCAL-GUST-KT:26.0
-X-WINDCAL-MODEL:HARM-NL 2 km
-X-WINDCAL-RAIN-MM:0.0
-X-WINDCAL-SEA-TEMP-C:16
-X-WINDCAL-TEMP-C:12
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:💨\n1️⃣6️⃣\n2️⃣6️⃣\nE ⬅️\n☀️\n10°C / 
- 🌊16°C
-DTSTART:20261019T200000Z
-DTEND:20261020T020000Z
-DTSTAMP:20261017T191352Z
-UID:windcal-1120682-20261019T200000Z@wind-cal.local
-SEQUENCE:0
-DESCRIPTION:no significant rain expected\, 26% cloud cover\, 10°C\, sea 1
- 6°C. Model: HARM-NL 2 km. Generated 2026-10-17 19:13 UTC by wind-cal. For
- ecasts change — re-checked hourly. https://www.windguru.cz/1120682
-LOCATION:Wijk aan Zee\, NL
-STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:15.8
-X-WINDCAL-CLOUD-PCT:26.0
-X-WINDCAL-DIRECTION:E ⬅️
-X-WINDCAL-GUST-KT:26.0
-X-WINDCAL-MODEL:HARM-NL 2 km
-X-WINDCAL-RAIN-MM:0.0
-X-WINDCAL-SEA-TEMP-C:16
-X-WINDCAL-TEMP-C:10
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:💨\n1️⃣7️⃣\n2️⃣8️⃣\nE ⬅️\n⛅\n9°C / 🌊16
- °C
-DTSTART:20261020T040000Z
+DTSTART:20261020T070000Z
 DTEND:20261020T130000Z
-DTSTAMP:20261017T191352Z
-UID:windcal-1120682-20261020T040000Z@wind-cal.local
+DTSTAMP:20261017T220932Z
+UID:windcal-1120682-20261020T070000Z@wind-cal.local
 SEQUENCE:0
-DESCRIPTION:no significant rain expected\, 57% cloud cover\, 9°C\, sea 16
- °C. Model: HARM-NL 2 km\, GFS 13 km. Generated 2026-10-17 19:13 UTC by wi
- nd-cal. Forecasts change — re-checked hourly. https://www.windguru.cz/11
- 20682
+DESCRIPTION:no significant rain expected\, 70% cloud cover\, 10°C\, sea 1
+ 6°C. Model: HARM-NL 2 km\, GFS 13 km. Generated 2026-10-17 22:09 UTC by w
+ ind-cal. Forecasts change — re-checked hourly. https://www.windguru.cz/1
+ 120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:17.1
-X-WINDCAL-CLOUD-PCT:57.0
+X-WINDCAL-AVG-KT:17.0
+X-WINDCAL-CLOUD-PCT:70.5
 X-WINDCAL-DIRECTION:E ⬅️
-X-WINDCAL-GUST-KT:28.0
+X-WINDCAL-GUST-KT:27.0
 X-WINDCAL-MODEL:HARM-NL 2 km, GFS 13 km
 X-WINDCAL-RAIN-MM:0.0
 X-WINDCAL-SEA-TEMP-C:16
-X-WINDCAL-TEMP-C:9
+X-WINDCAL-TEMP-C:10
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:💨\n1️⃣8️⃣\n2️⃣9️⃣\nSSW ⬆️\n🌧️\n12°C /
