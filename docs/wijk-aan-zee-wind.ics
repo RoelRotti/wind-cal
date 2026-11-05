@@ -4,26 +4,26 @@ PRODID:-//wind-cal//Wind Forecast Calendar//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:Wijk aan Zee Wind
 BEGIN:VEVENT
-SUMMARY:💨\n1️⃣5️⃣\n2️⃣5️⃣\nS ⬆️\n🌧️\n12°C / 
+SUMMARY:💨\n1️⃣5️⃣\n2️⃣1️⃣\nENE ⬅️\n☀️\n7°C / 
  🌊13°C
-DTSTART:20261114T120000Z
-DTEND:20261115T000000Z
-DTSTAMP:20261105T062023Z
-UID:windcal-1120682-20261114T120000Z@wind-cal.local
+DTSTART:20261112T090000Z
+DTEND:20261112T150000Z
+DTSTAMP:20261105T151913Z
+UID:windcal-1120682-20261112T090000Z@wind-cal.local
 SEQUENCE:0
-DESCRIPTION:7.0mm rain expected\, 100% cloud cover\, 12°C\, sea 13°C. Mo
- del: GFS 13 km. Generated 2026-11-05 06:20 UTC by wind-cal. Forecasts chan
- ge — re-checked hourly. https://www.windguru.cz/1120682
+DESCRIPTION:no significant rain expected\, 3% cloud cover\, 7°C\, sea 13
+ °C. Model: GFS 13 km. Generated 2026-11-05 15:19 UTC by wind-cal. Forecas
+ ts change — re-checked hourly. https://www.windguru.cz/1120682
 LOCATION:Wijk aan Zee\, NL
 STATUS:CONFIRMED
-X-WINDCAL-AVG-KT:15.2
-X-WINDCAL-CLOUD-PCT:100.0
-X-WINDCAL-DIRECTION:S ⬆️
-X-WINDCAL-GUST-KT:25.0
+X-WINDCAL-AVG-KT:15.0
+X-WINDCAL-CLOUD-PCT:3.0
+X-WINDCAL-DIRECTION:ENE ⬅️
+X-WINDCAL-GUST-KT:21.0
 X-WINDCAL-MODEL:GFS 13 km
-X-WINDCAL-RAIN-MM:7.0
+X-WINDCAL-RAIN-MM:0.0
 X-WINDCAL-SEA-TEMP-C:13
-X-WINDCAL-TEMP-C:12
+X-WINDCAL-TEMP-C:7
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:💨💨\n2️⃣1️⃣\n3️⃣9️⃣\nW ➡️\n🌧️\n11°C
